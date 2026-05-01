@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nitro-bg: #000000;
+  --nitro-panel: rgba(10, 10, 10, 0.6);
+  --nitro-accent: #ff5a00;
+  --nitro-accent-soft: rgba(255, 90, 0, 0.2);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background:
+    radial-gradient(circle at center, rgba(255, 90, 0, 0.08), transparent 60%),
+    linear-gradient(180deg, #020202 0%, #000000 100%);
+  color: #fff;
+  overflow: hidden;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255, 90, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 90, 0, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(255, 90, 0, 0.05), transparent);
+  animation: scanline 9s linear infinite;
+  opacity: 0.25;
+}
+
+@layer utilities {
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(255, 90, 0, 0.4), 0 0 60px rgba(255, 90, 0, 0.2);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}

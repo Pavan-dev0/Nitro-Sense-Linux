@@ -1,0 +1,81 @@
+{
+  "name": "nitro-control",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Acer NitroSense Fan Control for Linux",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron": "ELECTRON_DEV=1 electron .",
+    "electron:prod": "electron .",
+    "dist": "npm run build && electron-builder --linux AppImage",
+    "dist:dir": "npm run build && electron-builder --linux dir"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "framer-motion": "^11.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "vite": "^5.0.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.0"
+  },
+  "build": {
+    "appId": "nitro.control",
+    "productName": "Nitro Control",
+    "copyright": "Copyright © 2024",
+    "asar": true,
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.cjs",
+      "icon.png"
+    ],
+    "extraResources": [
+      {
+        "from": "nitro-bridge.py",
+        "to": "nitro-bridge.py"
+      },
+      {
+        "from": "dist",
+        "to": "dist",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "icon": "icon.png",
+      "artifactName": "Nitro-Control-${version}.AppImage",
+      "executableName": "nitro-control",
+      "desktop": {
+        "Name": "Nitro Control",
+        "Comment": "Acer NitroSense Fan Control for Linux",
+        "Categories": "Utility;System;"
+      }
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}
